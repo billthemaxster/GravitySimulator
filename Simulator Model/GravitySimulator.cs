@@ -14,7 +14,7 @@ using System.IO;
 
 namespace Simulator.Model
 {
-    #region Delegate
+    #region Delegates
     /// <summary>
     /// Event handler for a data logging event.
     /// </summary>
@@ -27,7 +27,7 @@ namespace Simulator.Model
     /// <param name="sender">The simulator that raised the event</param>
     /// <param name="e">The error details</param>
     public delegate void SimulatorErrorHandler(object sender, SimulatorErrorEventArgs e);
-    #endregion // Delegate
+    #endregion // Delegates
 
     /// <summary>
     /// Represents a gravity simulator takes a list of celestial bodies, the 
@@ -183,7 +183,6 @@ namespace Simulator.Model
                 SimulatorError(this, new SimulatorErrorEventArgs(errors));
             }
         }
-
         #endregion // Event Methods
 
         #region Body Creation

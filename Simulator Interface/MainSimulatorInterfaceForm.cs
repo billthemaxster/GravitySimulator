@@ -1,14 +1,16 @@
-﻿using Simulator.Interface.ViewModel;
-using Simulator.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using Simulator.Interface.ViewModel;
+using Simulator.Model;
 
 namespace Simulator.Interface
 {
@@ -24,6 +26,11 @@ namespace Simulator.Interface
         /// The celestial bodies that have been selected to simulate.
         /// </summary>
         public List<CelestialBody> SelectedBodies { get; set; }
+
+        /// <summary>
+        /// Gets or sets the simulator this simulation will run.
+        /// </summary>
+        public GravitySimulator Simulator { get; set; }
         #endregion //Properties
 
         #region Constructors
@@ -66,10 +73,10 @@ namespace Simulator.Interface
 
             CelestialBody selectedBody = selectedListBody.Body;
 
-            lbSelected.Items.Add(lbPossible.SelectedItem);
+            lbSelected.Items.Add(selectedListBody);
             SelectedBodies.Add(selectedBody);
 
-            lbPossible.Items.Remove(lbPossible.SelectedItem);
+            lbPossible.Items.Remove(selectedListBody);
             PossibleBodies.Remove(selectedBody);
 
             this.SortLists();
@@ -159,7 +166,12 @@ namespace Simulator.Interface
         /// <param name="e"></param>
         private void btnRun_Click(object sender, EventArgs e)
         {
+            this.Simulator = new GravitySimulator(this.SelectedBodies);
 
+            SimulatorPropertiesPopupForm popup = new SimulatorPropertiesPopupForm(this.Simulator);
+            popup.SimulatorPreStart += StartSimulation;
+
+            popup.Show();
         }
         #endregion // UI Event Methods
 
@@ -184,6 +196,15 @@ namespace Simulator.Interface
             }
 
             this.SortLists();
+        }
+
+        private void StartSimulation(GravitySimulator simulator)
+        {
+            this.Simulator = simulator;
+            // Start the simulation in a separate thread
+            // Need some sort of event handling for the separate thread
+            //throw new NotImplementedException();
+            return;
         }
         #endregion //Event Methods
 
@@ -231,7 +252,5 @@ namespace Simulator.Interface
             }
         }
         #endregion // Private Methods
-
-
     }
 }
