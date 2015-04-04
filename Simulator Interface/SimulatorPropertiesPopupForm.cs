@@ -28,6 +28,7 @@ namespace Simulator.Interface
             this.InitializeComponent();
 
             this.Simulator = simulator;
+            cbDurationUnit.DataSource = Enum.GetValues(typeof(TimeUnit));
         }
         #endregion // Constructors
 
@@ -37,6 +38,21 @@ namespace Simulator.Interface
         /// </summary>
         public event SimulatorPreStartDelegate SimulatorPreStart;
         #endregion // Events
+
+        #region Enums
+        /// <summary>
+        /// Enumeration for the time units available.
+        /// </summary>
+        private enum TimeUnit
+        {
+            Seconds,
+            Minutes,
+            Hours,
+            Days,
+            Months,
+            Years
+        }
+        #endregion //Enums
 
         #region Properties
         /// <summary>
@@ -94,7 +110,7 @@ namespace Simulator.Interface
         /// <param name="e">The click event</param>
         private void btnRun_Click(object sender, EventArgs e)
         {
-            if (!this.Validate())
+            if (!this.ValidateAndSet())
             {
                 MessageBox.Show("Simulation cannot be run with current properties.");
             }
@@ -108,6 +124,7 @@ namespace Simulator.Interface
                 this.Close();
             }
         }
+
         #endregion // UI Event Methods
 
         #region Methods
@@ -131,7 +148,34 @@ namespace Simulator.Interface
             double duration;
             if (double.TryParse(txtDuration.Text, out duration))
             {
-                this.Duration = duration;
+                double unitMultiplier = 0.0;
+
+                switch ((TimeUnit)cbDurationUnit.SelectedValue)
+                {
+                    case TimeUnit.Seconds:
+                        unitMultiplier = 1.0;
+                        break;
+                    case TimeUnit.Minutes:
+                        unitMultiplier = 60;
+                        break;
+                    case TimeUnit.Hours:
+                        unitMultiplier = 3600;
+                        break;
+                    case TimeUnit.Days:
+                        unitMultiplier = 24 * 3600;
+                        break;
+                    case TimeUnit.Months:
+                        unitMultiplier = 30 * 24 * 3600;
+                        break;
+                    case TimeUnit.Years:
+                        unitMultiplier = 365 * 24 * 3600;
+                        break;
+                    default:
+                        valid &= false;
+                        break;
+                }
+
+                this.Duration = duration * unitMultiplier;
             }
             else
             {

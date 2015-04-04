@@ -35,6 +35,7 @@
             this.lblDuration = new System.Windows.Forms.Label();
             this.lblResolution = new System.Windows.Forms.Label();
             this.btnRun = new System.Windows.Forms.Button();
+            this.cbDurationUnit = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtTimeStep
@@ -98,11 +99,27 @@
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
+            // cbDurationUnit
+            // 
+            this.cbDurationUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDurationUnit.FormattingEnabled = true;
+            this.cbDurationUnit.Items.AddRange(new object[] {
+            "Seconds",
+            "Hours",
+            "Days",
+            "Months",
+            "Years"});
+            this.cbDurationUnit.Location = new System.Drawing.Point(200, 38);
+            this.cbDurationUnit.Name = "cbDurationUnit";
+            this.cbDurationUnit.Size = new System.Drawing.Size(70, 21);
+            this.cbDurationUnit.TabIndex = 7;
+            // 
             // SimulatorPropertiesPopupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(219, 118);
+            this.ClientSize = new System.Drawing.Size(282, 118);
+            this.Controls.Add(this.cbDurationUnit);
             this.Controls.Add(this.btnRun);
             this.Controls.Add(this.lblResolution);
             this.Controls.Add(this.lblDuration);
@@ -110,7 +127,6 @@
             this.Controls.Add(this.txtDuration);
             this.Controls.Add(this.lblTimeStep);
             this.Controls.Add(this.txtTimeStep);
-            this.MaximumSize = new System.Drawing.Size(235, 157);
             this.MinimumSize = new System.Drawing.Size(235, 157);
             this.Name = "SimulatorPropertiesPopupForm";
             this.Text = "Set Simulator";
@@ -128,5 +144,6 @@
         private System.Windows.Forms.Label lblDuration;
         private System.Windows.Forms.Label lblResolution;
         private System.Windows.Forms.Button btnRun;
+        private System.Windows.Forms.ComboBox cbDurationUnit;
     }
 }

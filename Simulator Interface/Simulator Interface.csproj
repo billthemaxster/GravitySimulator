@@ -60,7 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimulatorPropertiesPopupForm.cs">
       <SubType>Form</SubType>
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="SimulatorPropertiesPopupForm.Designer.cs">
       <DependentUpon>SimulatorPropertiesPopupForm.cs</DependentUpon>
