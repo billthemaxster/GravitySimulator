@@ -40,5 +40,14 @@ namespace SimulatorLogic.Models
             this.Y = a.Y;
             this.Z = a.Z;
         }
+
+        public override bool Equals(object obj)
+        {
+            Vector other = (Vector)obj;
+
+            return this.X.Equals(other.X)
+                && this.Y.Equals(other.Y)
+                && this.Z.Equals(other.Z);
+        }
     }
 }

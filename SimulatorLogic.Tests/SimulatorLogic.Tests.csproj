@@ -60,6 +60,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimulatorLogic\SimulatorLogic.csproj">
+      <Project>{803ed676-d262-4f63-a039-1063f54e9cea}</Project>
+      <Name>SimulatorLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
