@@ -71,11 +71,31 @@ namespace SimulatorLogic.Models
 
         public override bool Equals(object obj)
         {
+            if (obj == null || obj.GetType() != typeof(Vector))
+            {
+                return false;
+            }
+
             Vector other = (Vector)obj;
 
             return this.X.Equals(other.X)
                 && this.Y.Equals(other.Y)
                 && this.Z.Equals(other.Z);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 13;
+
+            unchecked
+            {
+                hashCode += X.GetHashCode() * 17;
+                hashCode += Y.GetHashCode() * 23;
+                hashCode += Z.GetHashCode() * 29;
+
+            }
+
+            return hashCode;
         }
 
         public void Add(Vector vector)
