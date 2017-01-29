@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logic\CelestialBodyLogic.cs" />
+    <Compile Include="Logic\SimulationLogic.cs" />
     <Compile Include="Logic\VectorLogic.cs" />
     <Compile Include="Models\CelestialBody.cs" />
     <Compile Include="Models\Vector.cs" />
