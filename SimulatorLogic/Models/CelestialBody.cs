@@ -41,6 +41,5 @@ namespace SimulatorLogic.Models
 
             Mass = celestialBody.Mass;
         }
-
     }
 }

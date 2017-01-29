@@ -13,13 +13,13 @@ namespace SimulatorLogic.Logic
         private const double GravitationalConstant = 6.6738E-11;
         public static Vector DistanceBetweenBodies(CelestialBody first, CelestialBody second)
         {
-            return VectorLogic.Subtract(first.Postition, second.Postition);
+            return Vector.Subtract(first.Postition, second.Postition);
         }
 
         public static Vector AccelerationBetweenBodies(CelestialBody first, CelestialBody second)
         {
             Vector distance = DistanceBetweenBodies(first, second);
-            var magnitudeOfDistance = VectorLogic.Magnitude(distance);
+            var magnitudeOfDistance = distance.Magnitude;
 
             if (magnitudeOfDistance == 0)
             {
@@ -28,20 +28,20 @@ namespace SimulatorLogic.Logic
 
             double distanceSquared = magnitudeOfDistance * magnitudeOfDistance;
 
-            Vector unitVectorOfDistance = VectorLogic.Unit(distance);
+            Vector unitVectorOfDistance = distance.UnitVector;
 
             double scaleFactor = (-1.0 * GravitationalConstant * second.Mass) / distanceSquared;
 
-            return VectorLogic.Scale(unitVectorOfDistance, scaleFactor);
+            return Vector.Scale(unitVectorOfDistance, scaleFactor);
         }
 
         public static CelestialBody Update(CelestialBody body, double timeStep)
         {
-            Vector velocityChange = VectorLogic.Scale(body.Acceleration, timeStep);
-            body.Velocity = VectorLogic.Add(body.Velocity, velocityChange);
+            Vector velocityChange = Vector.Scale(body.Acceleration, timeStep);
+            body.Velocity.Add(velocityChange);
 
-            Vector positionChange = VectorLogic.Scale(body.Velocity, timeStep);
-            body.Postition = VectorLogic.Add(body.Postition, positionChange);
+            Vector positionChange = Vector.Scale(body.Velocity, timeStep);
+            body.Postition.Add(positionChange);
 
             return body;
         }
@@ -58,7 +58,7 @@ namespace SimulatorLogic.Logic
                     if (!firstBody.Equals(secondBody))
                     {
                         Vector acceleration = AccelerationBetweenBodies(firstBody, secondBody);
-                        firstBody.Acceleration = VectorLogic.Add(firstBody.Acceleration, acceleration);
+                        firstBody.Acceleration.Add(acceleration);
                     }
                 }
             }
@@ -90,18 +90,17 @@ namespace SimulatorLogic.Logic
             {
                 double bodyScaleFactor = body.Mass * invertedTotalMass;
 
-                Vector positionChange = VectorLogic.Scale(body.Postition, bodyScaleFactor);
-                positionCOM = VectorLogic.Add(body.Postition, positionChange);
+                Vector positionChange = Vector.Scale(body.Postition, bodyScaleFactor);
+                positionCOM.Add(positionChange);
 
-                Vector velocityChange = VectorLogic.Scale(body.Velocity, bodyScaleFactor);
-                velocityCOM = VectorLogic.Add(body.Velocity, velocityChange);
-
+                Vector velocityChange = Vector.Scale(body.Velocity, bodyScaleFactor);
+                velocityCOM.Add(velocityChange);
             }
 
             foreach(CelestialBody body in bodies)
             {
-                body.Postition = VectorLogic.Subtract(body.Postition, positionCOM);
-                body.Velocity = VectorLogic.Subtract(body.Velocity, velocityCOM);
+                body.Postition.Subtract(positionCOM);
+                body.Velocity.Subtract(velocityCOM);
             }
 
             return bodies;

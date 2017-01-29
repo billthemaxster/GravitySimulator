@@ -20,7 +20,7 @@ namespace SimulatorLogic.Tests.Logic
             Vector first = null;
             Vector second = null;
             
-            Assert.Throws(typeof(NullReferenceException), () => VectorLogic.Add(first, second));
+            Assert.Throws(typeof(NullReferenceException), () => Vector.Add(first, second));
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace SimulatorLogic.Tests.Logic
 
             Vector expected = new Vector(0, 0, 0);
 
-            Vector result = VectorLogic.Add(firstZero, secondZero);
+            Vector result = Vector.Add(firstZero, secondZero);
 
             Assert.That(result, Is.EqualTo(expected));
         }
@@ -44,7 +44,7 @@ namespace SimulatorLogic.Tests.Logic
 
             Vector expected = new Vector(1, 1, 1);
 
-            Vector result = VectorLogic.Add(zero, one);
+            Vector result = Vector.Add(zero, one);
 
             Assert.That(result, Is.EqualTo(expected));
         }
@@ -57,7 +57,7 @@ namespace SimulatorLogic.Tests.Logic
 
             Vector expected = new Vector(-1, -1, -1);
 
-            Vector result = VectorLogic.Add(zero, minusOne);
+            Vector result = Vector.Add(zero, minusOne);
 
             Assert.That(result, Is.EqualTo(expected));
         }
@@ -70,7 +70,7 @@ namespace SimulatorLogic.Tests.Logic
 
             Vector expected = new Vector(0, 0, 0);
 
-            Vector result = VectorLogic.Add(one, minusOne);
+            Vector result = Vector.Add(one, minusOne);
 
             Assert.That(result, Is.EqualTo(expected));
         }
@@ -79,7 +79,7 @@ namespace SimulatorLogic.Tests.Logic
         ////[TestCase(new { First = new Vector(1, 2, 3), Second = new Vector(1, 2, 3), Expected = new Vector(2,4,6))]
         //public void Add_Stuff(Vector first, Vector second, Vector expected)
         //{
-        //    Vector result = VectorLogic.Add(first, second);
+        //    Vector result = Vector.Add(first, second);
 
         //    Assert.That(result, Is.EqualTo(expected));
         //}
