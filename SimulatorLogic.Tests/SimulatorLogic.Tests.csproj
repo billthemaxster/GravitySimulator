@@ -50,7 +50,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Logic\VectorLogicTests.cs" />
+    <Compile Include="Logic\VectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

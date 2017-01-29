@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace SimulatorLogic.Tests.Logic
 {
     [TestFixture]
-    class VectorLogicTests
+    class VectorTests
     {
         #region Add
 
